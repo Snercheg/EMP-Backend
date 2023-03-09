@@ -1,3 +1,3 @@
 # EMP-Backend
-## Using github flow
-## Stack Symphony + postgres
+## Using Github Flow
+## Stack Symphony + PostgreSQL
