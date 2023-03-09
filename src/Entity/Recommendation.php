@@ -3,6 +3,7 @@
 namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /** Recommendation
@@ -43,21 +44,26 @@ class Recommendation
     /**
      *  @ORM\Column(type="datetime")
      */
-    private string $createdAt;
+    /**
+     * @var \DateTime
+     */
+    public $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    public $modifiedAt;
+
     /**
      * @ORM\Column(type="integer")
      */
     private int $createdBy;
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private string $modifiedAt;
-    /**
      * @ORM\Column(type="integer")
      */
     private int $modifiedBy;
     /**
-     * @var Type[] Available types from this reccomendatins
+     * @var Type[] Available types from this recommendations
      * @ORM\OneToMany(targetEntity="Type", mappedBy="recommendation", cascade={"persist","remove"})
      */
     private iterable $types;
@@ -65,7 +71,37 @@ class Recommendation
     {
         $this->types = new ArrayCollection();
     }
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModifiedAt()
+    {
+        return $this->modifiedAt;
+    }
+
+    /**
+     * @param \DateTime $modifiedAt
+     */
+    public function setModifiedAt($modifiedAt)
+    {
+        $this->modifiedAt = $modifiedAt;
+    }
     /**
      * @return int|null
      */
@@ -163,22 +199,6 @@ class Recommendation
     }
 
     /**
-     * @return DateTime
-     */
-    public function getCreatedAt(): DateTime
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param DateTime $createdAt
-     */
-    public function setCreatedAt(DateTime $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
      * @return int
      */
     public function getCreatedBy(): int
@@ -192,22 +212,6 @@ class Recommendation
     public function setCreatedBy(int $createdBy): void
     {
         $this->createdBy = $createdBy;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getModifiedAt(): DateTime
-    {
-        return $this->modifiedAt;
-    }
-
-    /**
-     * @param DateTime $modifiedAt
-     */
-    public function setModifiedAt(DateTime $modifiedAt): void
-    {
-        $this->modifiedAt = $modifiedAt;
     }
 
     /**

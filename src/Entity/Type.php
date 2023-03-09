@@ -22,21 +22,17 @@ class Type
      */
     private ?int $id = null;
     /**
-     * @ORM\Column
+     * @ORM\Column(type="text")
      */
-    private string $description ='';
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private int $recommendationId;
+    private string $description;
     /**
      * @ORM\Column(type="integer")
      */
     private int $createdBy;
     /**
-     * @ORM\Column(type="datetime")
+     * @var \DateTime
      */
-    public string $modifiedAt ='';
+    public $modifiedAt;
     /**
      * @ORM\Column(type="integer")
      */
@@ -49,7 +45,21 @@ class Type
     {
         return $this->id;
     }
+    /**
+     * @return \DateTime
+     */
+    public function getModifiedAt()
+    {
+        return $this->modifiedAt;
+    }
 
+    /**
+     * @param \DateTime $modifiedAt
+     */
+    public function setModifiedAt($modifiedAt)
+    {
+        $this->modifiedAt = $modifiedAt;
+    }
     /**
      * @param int|null $id
      */
@@ -74,7 +84,6 @@ class Type
         $this->description = $description;
     }
 
-
     /**
      * @return int
      */
@@ -92,22 +101,6 @@ class Type
     }
 
     /**
-     * @return string
-     */
-    public function getModifiedAt(): string
-    {
-        return $this->modifiedAt;
-    }
-
-    /**
-     * @param string $modifiedAt
-     */
-    public function setModifiedAt(string $modifiedAt): void
-    {
-        $this->modifiedAt = $modifiedAt;
-    }
-
-    /**
      * @return int
      */
     public function getModifiedBy(): int
@@ -122,42 +115,23 @@ class Type
     {
         $this->modifiedBy = $modifiedBy;
     }
-
-    /**
-     * @return ArrayCollection|iterable
-     */
-    public function getRecommendationId()
-    {
-        return $this->recommendationId;
-    }
-
-    /**
-     * @param ArrayCollection|iterable $recommendationId
-     */
-    public function setRecommendationId($recommendationId): void
-    {
-        $this->recommendationId = $recommendationId;
-    }
     /**
      *
      * @ORM\ManyToOne(targetEntity="Recommendation", inversedBy="types")
     */
     private ?Recommendation $recommendation = null;
-
     /**
      * @return Recommendation|null
      */
-    public function getRecommendation(): ?Recommendation
+    public function getRecommendationId(): ?Recommendation
     {
         return $this->recommendation;
     }
-
     /**
      * @param Recommendation|null $recommendation
      */
-    public function setRecommendation(?Recommendation $recommendation): void
+    public function setRecommendationId(?Recommendation $recommendation): void
     {
         $this->recommendation = $recommendation;
     }
-
 }
