@@ -66,7 +66,7 @@ class Recommendation
     private int $modifiedBy;
     /**
      * @var Type[] Available types from this recommendations
-     * @ORM\OneToMany(targetEntity="Type", mappedBy="recommendation", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Type", mappedBy="recommendation")
      */
     private iterable $types;
     public function __construct()
