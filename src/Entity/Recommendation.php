@@ -45,14 +45,16 @@ class Recommendation
      *  @ORM\Column(type="datetime")
      */
     /**
+     * @ORM\Column(type="datetime")
      * @var \DateTime
      */
-    public $createdAt;
+    protected $createdAt;
 
     /**
+     * @ORM\Column(type="datetime")
      * @var \DateTime
      */
-    public $modifiedAt;
+    protected $modifiedAt;
 
     /**
      * @ORM\Column(type="integer")

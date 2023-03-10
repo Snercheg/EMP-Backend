@@ -30,9 +30,10 @@ class Type
      */
     private int $createdBy;
     /**
+     * @ORM\Column(type="datetime")
      * @var \DateTime
      */
-    public $modifiedAt;
+    protected $modifiedAt;
     /**
      * @ORM\Column(type="integer")
      */
