@@ -49,24 +49,13 @@ class Type
     /**
      * @return \DateTime
      */
+    public function __construct()
+    {
+        $this->modifiedAt = new \DateTime();
+    }
     public function getModifiedAt()
     {
         return $this->modifiedAt;
-    }
-
-    /**
-     * @param \DateTime $modifiedAt
-     */
-    public function setModifiedAt($modifiedAt)
-    {
-        $this->modifiedAt = $modifiedAt;
-    }
-    /**
-     * @param int|null $id
-     */
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
     }
 
     /**

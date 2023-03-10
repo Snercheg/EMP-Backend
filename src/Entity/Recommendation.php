@@ -72,6 +72,8 @@ class Recommendation
     public function __construct()
     {
         $this->types = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->modifiedAt = new \DateTime();
     }
     /**
      * @return \DateTime
@@ -81,13 +83,6 @@ class Recommendation
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
 
     /**
      * @return \DateTime
@@ -98,26 +93,11 @@ class Recommendation
     }
 
     /**
-     * @param \DateTime $modifiedAt
-     */
-    public function setModifiedAt($modifiedAt)
-    {
-        $this->modifiedAt = $modifiedAt;
-    }
-    /**
      * @return int|null
      */
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
     }
 
     /**
