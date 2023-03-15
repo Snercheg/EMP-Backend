@@ -12,9 +12,6 @@ security:
         main:
             lazy: true
             provider: users_in_memory
-            logout:
-                path: app_logout
-                target: /
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

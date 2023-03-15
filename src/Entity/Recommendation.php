@@ -28,15 +28,27 @@ class Recommendation
     /**
      * @ORM\Column(type="float")
      */
-    private float $temperatureRange;
+    private float $temperatureMin;
     /**
      * @ORM\Column(type="float")
      */
-    private float $humidityRange;
+    private float $temperatureMax;
     /**
      * @ORM\Column(type="float")
      */
-    private float $illuminationRange;
+    private float $humidityMin;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private float $humidityMax;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private float $illuminationMin;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private float $illuminationMax;
     /**
      * @ORM\Column(type="text")
      */
@@ -72,9 +84,15 @@ class Recommendation
     public function __construct()
     {
         $this->types = new ArrayCollection();
+        $this->settings = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->modifiedAt = new \DateTime();
     }
+    /**
+     * @var Setting[] Available types from this recommendations
+     * @ORM\OneToMany(targetEntity="Setting", mappedBy="recommendation")
+     */
+    private iterable $settings;
     /**
      * @return \DateTime
      */
@@ -82,8 +100,6 @@ class Recommendation
     {
         return $this->createdAt;
     }
-
-
     /**
      * @return \DateTime
      */
@@ -119,49 +135,49 @@ class Recommendation
     /**
      * @return float
      */
-    public function getTemperatureRange(): float
+    public function getTemperatureMin(): float
     {
-        return $this->temperatureRange;
+        return $this->temperatureMin;
     }
 
     /**
-     * @param float $temperatureRange
+     * @param float $temperatureMin
      */
-    public function setTemperatureRange(float $temperatureRange): void
+    public function setTemperatureMin(float $temperatureMin): void
     {
-        $this->temperatureRange = $temperatureRange;
-    }
-
-    /**
-     * @return float
-     */
-    public function getHumidityRange(): float
-    {
-        return $this->humidityRange;
-    }
-
-    /**
-     * @param float $humidityRange
-     */
-    public function setHumidityRange(float $humidityRange): void
-    {
-        $this->humidityRange = $humidityRange;
+        $this->temperatureMin = $temperatureMin;
     }
 
     /**
      * @return float
      */
-    public function getIlluminationRange(): float
+    public function getHumidityMin(): float
     {
-        return $this->illuminationRange;
+        return $this->humidityMin;
     }
 
     /**
-     * @param float $illuminationRange
+     * @param float $humidityMin
      */
-    public function setIlluminationRange(float $illuminationRange): void
+    public function setHumidityMin(float $humidityMin): void
     {
-        $this->illuminationRange = $illuminationRange;
+        $this->humidityMin = $humidityMin;
+    }
+
+    /**
+     * @return float
+     */
+    public function getIlluminationMin(): float
+    {
+        return $this->illuminationMin;
+    }
+
+    /**
+     * @param float $illuminationMin
+     */
+    public function setIlluminationMin(float $illuminationMin): void
+    {
+        $this->illuminationMin = $illuminationMin;
     }
 
     /**
@@ -219,5 +235,61 @@ class Recommendation
     {
         return $this->types;
     }
+
+    /**
+     * @return Setting[]|iterable
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+    /**
+     * @return float
+     */
+    public function getHumidityMax(): float
+    {
+        return $this->humidityMax;
+    }
+
+    /**
+     * @param float $humidityMax
+     */
+    public function setHumidityMax(float $humidityMax): void
+    {
+        $this->humidityMax = $humidityMax;
+    }
+
+    /**
+     * @return float
+     */
+    public function getIlluminationMax(): float
+    {
+        return $this->illuminationMax;
+    }
+
+    /**
+     * @param float $illuminationMax
+     */
+    public function setIlluminationMax(float $illuminationMax): void
+    {
+        $this->illuminationMax = $illuminationMax;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTemperatureMax(): float
+    {
+        return $this->temperatureMax;
+    }
+
+    /**
+     * @param float $temperatureMax
+     */
+    public function setTemperatureMax(float $temperatureMax): void
+    {
+        $this->temperatureMax = $temperatureMax;
+    }
+
 
 }
