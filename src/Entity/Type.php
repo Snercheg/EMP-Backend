@@ -52,6 +52,7 @@ class Type
     public function __construct()
     {
         $this->modifiedAt = new \DateTime();
+        $this->types = new ArrayCollection();
     }
     public function getModifiedAt()
     {
@@ -106,9 +107,8 @@ class Type
         $this->modifiedBy = $modifiedBy;
     }
     /**
-     *
      * @ORM\ManyToOne(targetEntity="Recommendation", inversedBy="types")
-     */
+    */
     private ?Recommendation $recommendation = null;
     /**
      * @return Recommendation|null
@@ -123,5 +123,17 @@ class Type
     public function setRecommendationId(?Recommendation $recommendation): void
     {
         $this->recommendation = $recommendation;
+    }
+    /**
+     * @var Module[] Available types from this typeId
+     * @ORM\OneToMany(targetEntity="Module", mappedBy="typeId")
+     */
+    private iterable $modules;
+    /**
+     * @return Module[]
+     */
+    public function getModules(): iterable|ArrayCollection
+    {
+        return $this->modules;
     }
 }

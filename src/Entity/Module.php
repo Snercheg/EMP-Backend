@@ -56,51 +56,50 @@ class Module
     }
 
 
-    /**
-     * The id of the settings
-     *
-     * @ORM\Column(type="integer")
-     */
-    private ?int $settings_id = null;
+
 
     /**
-     * @return int|null
+     * @ORM\ManyToOne(targetEntity="Setting", inversedBy="modules")
      */
-    public function getSettingsId(): ?int
+    private ?Setting $settingId = null;
+    /**
+     * @return Setting|null
+     */
+    public function getSettingId(): ?Setting
     {
-        return $this->settings_id;
+        return $this->settingId;
+    }
+    /**
+     * @param Setting|null $settingId
+     */
+    public function setSettingId(?Setting $settingId): void
+    {
+        $this->settingId = $settingId;
     }
 
 
-    /**
-     * The id of the type
-     *
-     * @ORM\Column(type="integer")
-     */
-    private ?int $type_id = null;
+
+
 
     /**
-     * @return int|null
+     * @ORM\ManyToOne(targetEntity="Type", inversedBy="modules")
      */
-    public function getTypeId(): ?int
+    private ?Type $typeId = null;
+    /**
+     * @return Type|null
+     */
+    public function getTypeId(): ?Type
     {
-        return $this->type_id;
+        return $this->typeId;
+    }
+    /**
+     * @param Type|null typeId
+     */
+    public function setTypeId(?Type $typeId): void
+    {
+        $this->typeId = $typeId;
     }
 
-    /**
-     * The id of the module_type
-     *
-     * @ORM\Column(type="integer")
-     */
-    private ?int $module_type_id = null;
-
-    /**
-     * @return int|null
-     */
-    public function getModuleTypeId(): ?int
-    {
-        return $this->module_type_id;
-    }
 
 
 
@@ -110,7 +109,6 @@ class Module
      * @ORM\Column(type="text")
      */
     public string $status = 'StAtUs';
-
     /**
      * @return string
      */
@@ -118,7 +116,6 @@ class Module
     {
         return $this->status;
     }
-
     /**
      * @param string $status
      */
@@ -130,18 +127,36 @@ class Module
 
 
     /**
+     * @var UserModule[] UserModule of this module
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="UserModule",
+     *     mappedBy="moduleId")
+     */
+    private iterable $userModules;
+
+    /**
+     * @return iterable
+     */
+    public function getUserModules(): iterable|ArrayCollection
+    {
+        return $this->userModules;
+    }
+
+
+    /**
      * @var Data[] datas of this module
      *
      * @ORM\OneToMany(
      *     targetEntity="Data",
-     *     mappedBy="module",
-     *     cascade={"persist", "remove"})
+     *     mappedBy="module")
      */
     private iterable $datas;
 
     public function __construct()
     {
         $this->datas = new ArrayCollection();
+        $this->userModules = new ArrayCollection();
     }
 
     /**
@@ -151,7 +166,4 @@ class Module
     {
         return $this->datas;
     }
-
-
-
 }
