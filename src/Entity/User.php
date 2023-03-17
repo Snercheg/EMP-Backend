@@ -1,16 +1,14 @@
 <?php
 
 namespace App\Entity;
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * A user
- * 
  * @ORM\Entity
  */
 #[ApiResource]
-//Reccomendation
 class User {
     /**
      * The id of the user
@@ -27,8 +25,8 @@ class User {
      */
     private string $username = '';
     /**
-     * @var User_module[] Available User_module from this users
-     * @ORM\OneToMany(targetEntity="User_module", mappedBy="userId")
+     * @var UserModule[] Available UserModule from this users
+     * @ORM\OneToMany(targetEntity="UserModule", mappedBy="userId")
      */
     private iterable $UserModules;
 
@@ -78,6 +76,15 @@ class User {
         $this->createdAt = new \DateTime();
         $this->modifiedAt = new \DateTime();
     }
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     /**
      * @return string
      */
@@ -135,13 +142,13 @@ class User {
      /**
      * @return int
      */
-    public function getModified_by(): int{
+    public function getModifiedBy(): int{
         return $this->modified_by;
     }
     /**
      * @param int $modified_by
      */
-    public function setModified_by(int $modified_by): void{
+    public function setModifiedBy(int $modified_by): void{
         $this->modified_by = $modified_by;
     }
 
@@ -163,17 +170,17 @@ class User {
      /**
      * @return int
      */
-    public function getRole_id(): int{
+    public function getRoleId(): int{
         return $this->role_id;
     }
     /**
      * @param int $role_id
      */
-    public function setRole_id(int $role_id): void{
+    public function setRoleId(int $role_id): void{
         $this->role_id = $role_id;
     }
     /**
-     * @return User_module[]
+     * @return UserModule[]
      */
     public function getUserModule(): iterable|ArrayCollection
     {
