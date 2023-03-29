@@ -9,30 +9,37 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * A data
+ *
  * @ORM\Entity
+ * @ORM\Table(
+ *     name="data",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="composite_idx", columns={"module_id", "measurements_date"})
+ *     }
+ * )
  */
 #[ApiResource]
 
 class Data
 {
     /**
+     * The id of the module_id
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id = null;
+    private ?int $module_id = null;
 
     /**
-     * @return int|null
+     * @return string
      */
-    public function getId(): ?int
+    public function getModule_id(): string
     {
-        return $this->id;
+        return $this->module_id;
     }
 
     /**
@@ -82,40 +89,49 @@ class Data
     }
 
     /**
+     * This is all measurements date
+     *
+     * @ORM\Id
      * @ORM\Column(type="datetime")
-     * @var \DateTime
      */
-    private $measurementsDate;
+    public ?\DateTimeInterface $measurements_date = null;
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface|null $measurements_date
      */
-    public function getMeasurementsDate()
+    public function getMeasurements_date(\DateTimeInterface|null $measurements_date): void
     {
-        return $this->measurementsDate;
+        $this->measurements_date = $measurements_date;
     }
-    public function __construct()
-    {
-        $this->measurementsDate = new \DateTime();
-    }
+
     /**
+     * The module of the date
      *
-     * @ORM\ManyToOne(targetEntity="Module", inversedBy="datas")
+     * @ORM\ManyToOne(
+     *     targetEntity="Module",
+     *     inversedBy="datas")
      */
     private ?Module $module = null;
+
+
     /**
-     * @return ?Module|null
+     * @param int|null $module_id
      */
-    public function getModuleId(): ?Module
+    public function setModuleId(?int $module_id): void
     {
-        return $this->module;
+        $this->module_id = $module_id;
     }
+
     /**
-     * @param ?Module|null $module
+     * @return int|null
      */
-    public function setModuleId(?Module $module): void
+    public function getModuleId(): ?int
     {
-        $this->module = $module;
+        return $this->module_id;
     }
+
+
+
+
 
 }

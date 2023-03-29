@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Entity;
-use ApiPlatform\Metadata\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,45 +30,23 @@ class Setting {
      * 
      * @ORM\Column(type="float")
      */
-    private ?float $temperature_setting = null;
+    private ?float $temperature_range = null;
     /**
      * The humidity_range of the setting
      * 
      * @ORM\Column(type="float")
      */
-    private ?float $humidity_setting = null;
+    private ?float $humidity_range = null;
     /**
      * The illumination_range of the setting
      * 
      * @ORM\Column(type="float")
      */
-    private ?float  $illumination_setting = null;
-    /**
-     * @ORM\ManyToOne(targetEntity="Recommendation", inversedBy="settings")
-     */
-    private ?Recommendation $recommendation = null;
-    /**
-     * @return Recommendation|null
-     */
-    public function getRecommendationId(): ?Recommendation
-    {
-        return $this->recommendation;
-    }
-    /**
-     * @param Recommendation|null $recommendation
-     */
-    public function setRecommendationId(?Recommendation $recommendation): void
-    {
-        $this->recommendation = $recommendation;
-    }
+    private ?float  $illumination_range = null;
+   
 
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    
+
 
     /**
      * @return string
@@ -88,55 +65,44 @@ class Setting {
      /**
      * @return ?float
      */
-    public function getTemperatureSetting(): ?float{
-        return $this->temperature_setting;
+    public function getTemperature_range(): ?float{
+        return $this->temperature_range;
     }
     /**
-     * @param ?float $temperature_setting
+     * @param ?float $temperature_range
      */
-    public function setTemperatureSetting(?float $temperature_setting): void{
-        $this->temperature_setting = $temperature_setting;
+    public function setTemperature_range(?float $temperature_range): void{
+        $this->temperature_range = $temperature_range;
     }
+
+    
      /**
      * @return ?float
      */
-    public function getHumiditySetting(): ?float{
-        return $this->humidity_setting;
+    public function getHumidity_range(): ?float{
+        return $this->humidity_range;
     }
     /**
-     * @param ?float $humidity_setting
+     * @param ?float $humidity_range
      */
-    public function setHumiditySetting(?float $humidity_setting): void{
-        $this->humidity_setting = $humidity_setting;
+    public function setHumidity_range(?float $humidity_range): void{
+        $this->humidity_range = $humidity_range;
     }
 
 
      /**
      * @return ?float
      */
-    public function getIlluminationSetting():  ?float{
-        return $this->illumination_setting;
+    public function getIllumination_range():  ?float{
+        return $this->illumination_range;
     }
     /**
-     * @param ?float
+     * @param ?float $created_at
      */
-    public function setIlluminationSetting(?float $illumination_setting): void{
-        $this->illumination_setting = $illumination_setting;
+    public function setIllumination_range( ?float $illumination_range): void{
+        $this->illumination_range = $illumination_range;
     }
-    /**
-     * @var Module[] Available types from this settingId
-     * @ORM\OneToMany(targetEntity="Module", mappedBy="settingId")
-     */
-    private iterable $modules;
-    /**
-     * @return Module[]
-     */
-    public function getModules(): iterable|ArrayCollection
-    {
-        return $this->modules;
-    }
-    public function __construct()
-    {
-        $this->modules = new ArrayCollection();
-    }
+
+
+    
 }

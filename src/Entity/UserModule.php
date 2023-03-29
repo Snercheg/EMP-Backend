@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Entity;
-use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-
 
 /**
  * A User_module
@@ -11,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  */
 #[ApiResource]
-
+//type
 class UserModule {
     /**
      * @ORM\Id
@@ -24,15 +23,6 @@ class UserModule {
      * @ORM\ManyToOne(targetEntity="User", inversedBy="UserModules")
     */
     private ?User $userId = null;
-
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     /**
      * @return User|null
      */
@@ -47,25 +37,12 @@ class UserModule {
     {
         $this->userId = $userId;
     }
-
     /**
-     * @ORM\ManyToOne(targetEntity="Module", inversedBy="userModules")
+     * The module_id of the User_module
+     * 
+     * @ORM\Column(type="integer")
      */
-    private ?Module $moduleId = null;
-    /**
-     * @return Module|null
-     */
-    public function getModuleId(): ?Module
-    {
-        return $this->moduleId;
-    }
-    /**
-     * @param Module|null $moduleId
-     */
-    public function setModuleId(?Module $moduleId): void
-    {
-        $this->moduleId = $moduleId;
-    }
+    private ?int $module_id = null;
     /**
      * The name of the User_module
      * 
@@ -76,7 +53,19 @@ class UserModule {
      * @ORM\Column(type="datetime")
      * @var \DateTime
      */
-    protected $linkedAt;
+    private \DateTime $linkedAt;
+     /**
+     * @return ?int
+     */
+    public function getModule_id(): ?int{
+        return $this->module_id;
+    }
+    /**
+     * @param ?int $module_id
+     */
+    public function setModule_id(?int $module_id): void{
+        $this->module_id = $module_id;
+    }
 
     
      /**
@@ -96,13 +85,18 @@ class UserModule {
      /**
      * @return ?\DateTimeInterface
      */
-    public function getLinkedAt():  ?\DateTimeInterface{
-        return $this->linkedAt;
+    public function getLinked_at():  ?\DateTimeInterface{
+        return $this->linked_at;
     }
-
+    /**
+     * @param ?\DateTimeInterface $linked_at
+     */
+    public function setLinked_at( ?\DateTimeInterface $linked_at): void{
+        $this->linked_at = $linked_at;
+    }
     public function __construct()
     {
-        $this->linkedAt = new \DateTime();
+        $this->$linkedAt = new \DateTime();
     }
 
     
