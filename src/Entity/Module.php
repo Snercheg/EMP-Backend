@@ -37,9 +37,6 @@ class Module
     {
         return $this->id;
     }
-
-
-
     /**
      * Api key of the module
      *
@@ -54,9 +51,6 @@ class Module
     {
         return $this->api_key;
     }
-
-
-
 
     /**
      * @ORM\ManyToOne(targetEntity="Setting", inversedBy="modules")
@@ -79,8 +73,6 @@ class Module
 
 
 
-
-
     /**
      * @ORM\ManyToOne(targetEntity="Type", inversedBy="modules")
      */
@@ -99,10 +91,6 @@ class Module
     {
         $this->typeId = $typeId;
     }
-
-
-
-
     /**
      * Status info
      *
@@ -123,9 +111,6 @@ class Module
     {
         $this->status = $status;
     }
-
-
-
     /**
      * @var UserModule[] UserModule of this module
      *
