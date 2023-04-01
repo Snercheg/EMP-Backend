@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Data;
@@ -23,18 +24,8 @@ class DataGet extends AbstractController
 
     public function getItem(int $id): Response
     {
-        $datas = $this->entityManager->getRepository(Data::class)->find($id);
-
-        if (!$datas) {
-            throw $this->createNotFoundException('No datas found for id ' . $id);
-        }
-        $data = [
-            'id' => $datas->getId(),
-            'humidity' => $datas->getHumidity(),
-            'temperature' => $datas->getTemperature(),
-            'illumination' => $datas->getIllumination(),
-            'measurementsDate' => $datas->getMeasurementsDate(),
-        ];
+        $datas = $this->entityManager->getRepository(Module::class)->find($id);
+        $data = $datas->getDatas();
         return $this->json($data);
     }
 }

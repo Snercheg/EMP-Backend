@@ -29,7 +29,7 @@ class DeleteOldDataCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        //.env дополнить строкой APP_TIMEZONE=Europe/Moscow
+        //.env_example дополнить строкой APP_TIMEZONE=Europe/Moscow
         date_default_timezone_set($_ENV['APP_TIMEZONE']);
         $date = new \DateTime();
         $date->modify('-30 days');
