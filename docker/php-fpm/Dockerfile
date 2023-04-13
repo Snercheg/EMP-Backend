@@ -3,12 +3,6 @@ FROM php:8.1.0-fpm-alpine
 # Install packages
 RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
 
-# Xdebug
-ARG INSTALL_XDEBUG=false
-RUN if [ ${INSTALL_XDEBUG} = true ]; \
-    then \
-      pecl install xdebug && docker-php-ext-enable xdebug; \
-    fi;
 
 COPY ./docker/php-fpm/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
@@ -25,6 +19,9 @@ RUN apk --no-cache add shadow && \
 # Source code
 RUN chown www-data:www-data /var/www
 COPY --chown=www-data:www-data ./ /var/www
+USER root
+RUN chown -R www-data:www-data ./ \
+   && chmod -R ug+rwX ./
 WORKDIR /var/www
 
 USER www-data
